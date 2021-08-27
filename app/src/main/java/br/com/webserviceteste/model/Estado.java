@@ -3,16 +3,16 @@ package br.com.webserviceteste.model;
 public class Estado {
 
     private int id;
-    private String sigla;
     private String nome;
+    private String sigla;
 
     public Estado(){}
 
-    public Estado(int id, String sigla, String nome){
+    public Estado(int id, String nome, String sigla){
 
         this.setId(id);
-        this.setSigla(sigla);
         this.setNome(nome);
+        this.setSigla(sigla);
     }
 
     public int getId() {

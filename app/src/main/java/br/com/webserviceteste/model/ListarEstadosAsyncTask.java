@@ -131,6 +131,7 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
                 while((linha = reader.readLine()) != null){
                     result.append(linha);
                 }
+                //RETORNA LISTA
                 return result.toString();
 
             }else{
@@ -141,6 +142,7 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
 
             Log.i("APIListar","doInBackground() --> "+e.getMessage());
         }finally {
+            //FECHA O SERVIDOR
             conn.disconnect();
         }
         return "Processamento com sucesso...";
@@ -152,6 +154,25 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
     protected void onPostExecute(String result){
 
         Log.i("APIListar","onPostExecute()--> Result: "+result);
+        Estado estado;
+        try{
+            JSONArray jsonArray = new JSONArray(result);
+            if(jsonArray.length() != 0 ){
+                for (int i = 0; i < jsonArray.length() ; i++ ){
+                    JSONObject  jsonObject = jsonArray.getJSONObject(i);
+                    estado = new Estado(jsonObject.getInt("id"),
+                            jsonObject.getString("nome"),
+                            jsonObject.getString("sigla"));
+
+                    Log.i("APIListar", "Estado ==> " + estado.getId() + " - "
+                    + estado.getNome() + " - " + estado.getSigla());
+
+
+                }
+            }
+        }catch (Exception e ){
+            Log.i("APIListar","doInBackground() --> "+e.getMessage());
+        }
 
 
     }
