@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.net.InetAddress;
@@ -18,7 +20,7 @@ import br.com.webserviceteste.R;
 import br.com.webserviceteste.model.ListarEstadosAsyncTask;
 
 public class MainActivity extends AppCompatActivity {
-
+    Button buscarCidade, buscarEstado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListarEstadosAsyncTask task = new ListarEstadosAsyncTask("permissao");
         task.execute();
+
 
 
 

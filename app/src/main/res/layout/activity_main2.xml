@@ -1,19 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
-    android:background="@drawable/fd_splash">
-
+    android:orientation="horizontal"
+  >
     <TextView
-        android:id="@+id/teste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
-        tools:ignore="MissingConstraints"
-        android:text="teste"/>
+        android:text="LISTA DE CIDADES E ESTADOS"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:id="@+id/cidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cidades"
+            android:textSize="30dp"/>
+
+        <Button
+            android:layout_margin="10dp"
+            android:id="@+id/estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estados"
+            android:layout_weight="1"
+            android:textSize="30dp"/>
+
+
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

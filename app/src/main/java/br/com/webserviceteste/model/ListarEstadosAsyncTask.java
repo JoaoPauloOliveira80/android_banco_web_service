@@ -24,7 +24,7 @@ import java.net.UnknownHostException;
 public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
     String ip = "10.0.0.104";
     String ip2 = "192.168.1.108";
-    String  caminho = "http://"+ip+"/curso_udemy/exer/APIListarEstados.php";
+    String  caminho = "http://"+ip2+"/curso_udemy/exer/APIListarEstados.php";
     String query;
     HttpURLConnection conn;
     URL url = null;
