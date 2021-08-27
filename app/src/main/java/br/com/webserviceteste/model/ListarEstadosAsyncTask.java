@@ -22,10 +22,10 @@ import java.net.URL;
 import java.net.UnknownHostException;
 
 public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
-    String ip = " 10.0.0.104";
+    String ip = "10.0.0.104";
     String ip2 = "192.168.1.108";
-    String query, caminho = "http://"+ip+"/curso_udemy/exer/APIListarEstados.php";
-
+    String  caminho = "http://"+ip+"/curso_udemy/exer/APIListarEstados.php";
+    String query;
     HttpURLConnection conn;
     URL url = null;
     Uri.Builder builder;
@@ -40,6 +40,7 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
         this.api_token = token;
         this.builder = new Uri.Builder();
         builder.appendQueryParameter("api_token", api_token);
+
     }
 
     @Override
@@ -53,28 +54,19 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
     protected String doInBackground(String... strings) {
 
         Log.i("APIListar","doInBackground()");
-
         // Gerar o conteúdo para a URL
-
         try {
-
             url = new URL(URL_WEB_SERVICE);
 
         }catch (MalformedURLException e){
-
             Log.i("APIListar","doInBackground() --> "+e.getMessage());
-
         }catch (Exception e){
-
             Log.i("APIListar","doInBackground() --> "+e.getMessage());
         }
 
         // Gerar uma requisição HTTP - POST - Result será um ArrayJson
-
         // conn
-
         try {
-
             conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(READ_TIME_OUT);
             conn.setConnectTimeout(CONNECTION_TIME_OUT);
@@ -95,7 +87,6 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
         // Adicionar o TOKEN e/ou outros parâmetros como por exemplo
         // um objeto a ser incluido, deletado ou alterado.
         // CRUD completo
-
         try {
 
             query = builder.build().getEncodedQuery();
@@ -113,6 +104,7 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
             conn.connect();
 
 
+
         }catch (Exception e){
 
             Log.i("APIListar","doInBackground() --> "+e.getMessage());
@@ -124,17 +116,33 @@ public class ListarEstadosAsyncTask extends  AsyncTask<String, String, String> {
         // http - código do response | 200 | 404 | 503
 
         try {
-
             response_code = conn.getResponseCode();
 
+            if(response_code == HttpURLConnection.HTTP_OK){
 
+                InputStream input = conn.getInputStream();
+
+                BufferedReader reader = new BufferedReader(
+                  new InputStreamReader(input)
+                );
+                StringBuilder result = new StringBuilder();
+                String linha = null;
+
+                while((linha = reader.readLine()) != null){
+                    result.append(linha);
+                }
+                return result.toString();
+
+            }else{
+                return "HTTP ERRO ==> " +response_code;
+            }
 
         }catch (Exception e){
 
             Log.i("APIListar","doInBackground() --> "+e.getMessage());
+        }finally {
+            conn.disconnect();
         }
-
-
         return "Processamento com sucesso...";
 
 
